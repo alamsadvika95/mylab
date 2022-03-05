@@ -1,3 +1,18 @@
+terraform {
+  required_providers {
+    # google = {
+    #   source = "hashicorp/google"
+    #   version = "4.12.0"
+    # }
+    google      = ">= 2.7, <3.66.0"
+    google-beta = ">= 2.7, <3.66.0"
+  }
+  backend "gcs" {
+    bucket = "cicd-339902-tfstate"
+    prefix = "terraform-testing"
+  }
+}
+
 provider "google" {
   project     = "cicd-339902"
   region      = "us-central1"
