@@ -23,7 +23,8 @@ terraform {
       project = "cicd-339902"
     }
   }
-  backend "local" {
-    path = "terraform/state/terraform.tfstate"
+  backend "gcs" {
+    bucket = "cicd-339902-tfstate"
+    prefix = "testing-terraform"
   }
 }
