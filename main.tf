@@ -35,6 +35,7 @@ provider "google-beta" {
 #     update = "40m"
 #   }
 # }
+#
 
 resource "google_compute_instance" "default" {
   name         = "test"
