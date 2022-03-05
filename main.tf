@@ -1,3 +1,7 @@
+provider "google" {
+  project = "cicd-339902"
+}
+
 //vpc
 resource "google_compute_network" "default" {
   name = "my-network"

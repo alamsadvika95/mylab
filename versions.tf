@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
+# terraform {
+#   required_version = ">= 0.13"
+#   required_providers {
+#     google = {
+#       source  = "hashicorp/google"
+#       version = "~> 4.0"
+#       project = "cicd-339902"
+#     }
+#   }
+#   backend "gcs" {
+#     bucket = "cicd-339902-tfstate"
+#     prefix = "testing-terraform"
+#   }
+# }
+
 terraform {
-  required_version = ">= 0.13"
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 4.0"
-      project = "cicd-339902"
-    }
-  }
-  backend "gcs" {
-    bucket = "cicd-339902-tfstate"
-    prefix = "testing-terraform"
-  }
+  required_version = "~> 1.0.0"
 }
