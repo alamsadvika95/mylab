@@ -20,6 +20,7 @@ terraform {
     google = {
       source  = "hashicorp/google"
       version = "~> 4.0"
+      project = "cicd-339902"
     }
   }
   backend "local" {
