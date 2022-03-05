@@ -36,11 +36,6 @@ provider "google-beta" {
 #   }
 # }
 
-resource "google_service_account" "service_account" {
-  account_id   = "service-account-id"
-  display_name = "Service Account"
-}
-
 resource "google_compute_instance" "default" {
   name         = "test"
   machine_type = "e2-micro"
@@ -72,10 +67,4 @@ resource "google_compute_instance" "default" {
   }
 
   metadata_startup_script = "echo hi > /test.txt"
-
-  service_account {
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = google_service_account.service_account.email
-    scopes = ["cloud-platform"]
-  }
 }
