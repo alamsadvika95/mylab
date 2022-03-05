@@ -7,31 +7,75 @@ provider "google-beta" {
   region      = "us-central1"
 }
 
-resource "google_service_account" "default" {
+# resource "google_service_account" "default" {
+#   account_id   = "service-account-id"
+#   display_name = "Service Account"
+# }
+
+# resource "google_container_cluster" "primary" {
+#   provider           = google-beta
+#   name               = "marcellus-wallace"
+#   location           = "us-central1-a"
+#   initial_node_count = 1
+#   node_config {
+#     machine_type = "e2-micro"
+#     spot         = true
+#     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
+#     service_account = google_service_account.default.email
+#     oauth_scopes = [
+#       "https://www.googleapis.com/auth/cloud-platform"
+#     ]
+#     labels = {
+#       foo = "bar"
+#     }
+#     tags = ["foo", "bar"]
+#   }
+#   timeouts {
+#     create = "30m"
+#     update = "40m"
+#   }
+# }
+
+resource "google_service_account" "service_account" {
   account_id   = "service-account-id"
   display_name = "Service Account"
 }
 
-resource "google_container_cluster" "primary" {
-  provider           = google-beta
-  name               = "marcellus-wallace"
-  location           = "us-central1-a"
-  initial_node_count = 1
-  node_config {
-    machine_type = "e2-micro"
-    spot         = true
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    service_account = google_service_account.default.email
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/cloud-platform"
-    ]
-    labels = {
-      foo = "bar"
+resource "google_compute_instance" "default" {
+  name         = "test"
+  machine_type = "e2-micro"
+  zone         = "us-central1-a"
+
+  tags = ["foo", "bar"]
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
     }
-    tags = ["foo", "bar"]
   }
-  timeouts {
-    create = "30m"
-    update = "40m"
+
+  // Local SSD disk
+  scratch_disk {
+    interface = "SCSI"
+  }
+
+  network_interface {
+    network = "default"
+
+    access_config {
+      // Ephemeral public IP
+    }
+  }
+
+  metadata = {
+    foo = "bar"
+  }
+
+  metadata_startup_script = "echo hi > /test.txt"
+
+  service_account {
+    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
+    email  = google_service_account.service_account.email
+    scopes = ["cloud-platform"]
   }
 }
