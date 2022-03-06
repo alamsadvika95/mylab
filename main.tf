@@ -19,8 +19,8 @@ resource "google_container_cluster" "primary" {
   provider           = google-beta
   name               = var.cluster_name
   location           = var.location
-  network            = google_compute_network.vpc-network.name
-  subnetwork         = google_compute_subnetwork.subnetwork.name
+  # network            = google_compute_network.vpc-network.name
+  # subnetwork         = google_compute_subnetwork.subnetwork.name
   initial_node_count = 1
 
   node_config {
@@ -41,22 +41,22 @@ resource "google_container_cluster" "primary" {
   }
 }
 
-resource "google_compute_subnetwork" "subnetwork" {
-  name          = var.subnetwork
-  ip_cidr_range = "10.2.0.0/16"
-  region        = var.location
-  network       = google_compute_network.vpc-network.id
-  secondary_ip_range {
-    range_name    = "tf-test-secondary-range-update1"
-    ip_cidr_range = "192.168.10.0/24"
-  }
-}
+# resource "google_compute_subnetwork" "subnetwork" {
+#   name          = var.subnetwork
+#   ip_cidr_range = "10.2.0.0/16"
+#   region        = var.location
+#   network       = google_compute_network.vpc-network.id
+#   secondary_ip_range {
+#     range_name    = "tf-test-secondary-range-update1"
+#     ip_cidr_range = "192.168.10.0/24"
+#   }
+# }
 
-resource "google_compute_network" "vpc-network" {
-  name                    = var.network
-  auto_create_subnetworks = false
-  mtu                     = 1460
-}
+# resource "google_compute_network" "vpc-network" {
+#   name                    = var.network
+#   auto_create_subnetworks = false
+#   mtu                     = 1460
+# }
 
 
-#
+# #

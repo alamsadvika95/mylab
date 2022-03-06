@@ -1,10 +1,10 @@
 variable "project_id" {
  description = "The project ID to host the cluster in"
- default   ="terraform-343304"
+ default   ="peak-lattice-342202"
 }
 variable "cluster_name" {
  description = "The name for the GKE cluster"
- default     = "spotvm-cluster"
+ default     = "testing"
 }
 variable "location" {
  description = "The region to host the cluster in"
