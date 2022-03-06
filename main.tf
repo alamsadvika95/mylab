@@ -14,11 +14,6 @@ provider "google-beta" {
   project     = var.project_id
 }
 
-resource "google_service_account" "default" {
-  account_id   = "928533608921@cloudservices.gserviceaccount.com"
-  display_name = "Service Account"
-}
-
 resource "google_container_cluster" "primary" {
   provider           = google-beta
   name               = var.cluster_name
@@ -31,7 +26,6 @@ resource "google_container_cluster" "primary" {
     machine_type = var.machine_type
     spot         = true
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    service_account = google_service_account.default.email
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
