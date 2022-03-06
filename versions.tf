@@ -13,30 +13,6 @@
 # limitations under the License.
 
 
-steps:
-- id: 'tf init'
-  name: 'hashicorp/terraform:1.1.7'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - |
-      terraform init
-# [START tf-plan]
-- id: 'tf plan'
-  name: 'hashicorp/terraform:1.1.7'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-      terraform plan
-# [END tf-plan]
-
-# [START tf-apply]
-- id: 'tf apply'
-  name: 'hashicorp/terraform:1.1.7'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - |     
-      terraform apply -auto-approve
-# [END tf-apply]
+terraform {
+  required_version = "~> 1.1.7"
+}

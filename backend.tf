@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "cicd-339902-tfstate"
-    prefix = "terraform-testing"
+    bucket = "terraform-343304-tfstate"
+    prefix = "terraform"
   }
 }
