@@ -1,0 +1,77 @@
+print access token 
+  gcloud auth print-access-token
+
+
+command
+  terraform init
+  terraform plan 
+  terraform apply 
+  terraform show 
+  terraform destroy 
+  terraform plan -out static_ip
+  terraform apply "static_ip"
+  terraform taint google_compute_instance.vm_instance
+install terraform graph
+  sudo apt-get update
+  sudo apt-get install -y graphviz
+  terraform graph | dot -Tsvg > graph.svg
+
+gcloud command 
+  gcloud config list --format 'value(core.project)'
+
+gsutil 
+  curl https://raw.githubusercontent.com/hashicorp/learn-terraform-modules/master/modules/aws-s3-static-website-bucket/www/index.html > index.html
+  gsutil cp *.html gs://YOUR-BUCKET-NAME
+
+
+
+
+
+  gcloud beta compute instances create demo-spotvm \
+    --provisioning-model=SPOT \
+    --image=debian-10-buster-v20200309 \
+    --image-family=debian-10] \
+    --image-project=debian-cloud \
+    --machine-type=e2-medium \
+    --instance-termination-action=STOP
+
+-----------------------------------------------------------------------------------------------------
+SPOT VM kubernetes
+
+gcloud config set project cicd-339902
+gcloud config set compute/region asia-east1
+gcloud config set compute/zone asia-east1-a
+gcloud components update
+
+//create a new cluster with spot vm
+gcloud beta container clusters create demo-cluster-spot --spot --num-nodes=2
+
+//create a new node pool for existing cluster 
+gcloud beta container node-pools create spot-pool --cluster=demo-cluster --spot --num-nodes=2
+
+//delete cluster 
+gcloud container clusters delete CLUSTER_NAME
+
+//list node-pools
+gcloud container node-pools list --cluster [CLUSTER-NAME] --zone [ZONE]
+gcloud container node-pools list --cluster marcellus-wallace --zone us-central1-a
+
+//describe node-pools
+gcloud container node-pools describe [NODE-POOL-NAME] --cluster [CLUSTER-NAME] --region [REGION]
+
+//inspect node-pools for using spot 
+kubectl describe node spot-pool
+
+//create spot-vm
+gcloud beta compute instances create demo-spotvm --provisioning-model=SPOT --instance-termination-action=DELETE
+
+//delete node-pools
+gcloud container node-pools delete POOL_NAME --cluster CLUSTER_NAME
+
+//
+gcloud compute project-info describe --project cicd-339902
+
+//service account 
+CLOUDBUILD_SA="$(gcloud projects describe terraform-343304 --format 'value(projectNumber)')@cloudbuild.gserviceaccount.com"
+gcloud projects add-iam-policy-binding terraform-343304 --member serviceAccount:$CLOUDBUILD_SA --role roles/editor
+
