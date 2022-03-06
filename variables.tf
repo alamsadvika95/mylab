@@ -22,12 +22,4 @@ variable "subnetwork" {
  description = "The subnetwork created to host the cluster in"
  default     = "spotvm"
 }
-# variable "ip_range_pods_name" {
-#  description = "The secondary ip range to use for pods"
-#  default     = "pods"
-# }
-# variable "ip_range_services_name" {
-#  description = "The secondary ip range to use for services"
-#  default     = "services"
-# }
 
