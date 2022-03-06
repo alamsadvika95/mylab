@@ -14,6 +14,14 @@ provider "google-beta" {
   project     = var.project_id
 }
 
+module "gke_auth" {
+ source = "terraform-google-modules/kubernetes-engine/google//modules/auth"
+ project_id   = var.project_id
+ location     = var.location
+ cluster_name = google_container_cluster.primary.name
+}
+
+
 resource "google_container_cluster" "primary" {
   provider           = google-beta
   name               = var.cluster_name
