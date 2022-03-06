@@ -1,6 +1,6 @@
 variable "project_id" {
  description = "The project ID to host the cluster in"
- default   ="peak-lattice-342202"
+ default   ="terraform-343304-tfstate"
 }
 variable "cluster_name" {
  description = "The name for the GKE cluster"
