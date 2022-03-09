@@ -12,8 +12,8 @@ module "gke" {
   name                       = "gke-test-1"
   region                     = "us-central1"
   zones                      = ["us-central1-a"]
-  network                    = "vpc-01"
-  subnetwork                 = "us-central1-01"
+  network                    = "cluster"
+  subnetwork                 = "cluster-subnet"
   ip_range_pods              = "ip-range-pods"
   ip_range_services          = "ip-range-services"
   http_load_balancing        = false
