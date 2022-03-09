@@ -20,6 +20,7 @@ steps:
   args: 
   - '-c'
   - |
+      cd terraform/
       terraform init
 
 
@@ -29,6 +30,7 @@ steps:
   entrypoint: 'sh'
   args: 
   - '-c'
-  - |     
+  - |   
+      cd terraform/  
       terraform apply -auto-approve
 # [END tf-apply]
