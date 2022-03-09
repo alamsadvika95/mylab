@@ -1,29 +1,3 @@
-module "gcp-network" {
-  source       = "terraform-google-modules/network/google"
-  project_id   = "terraform-343304"
-  network_name = "cluster"
-  subnets = [
-    {
-      subnet_name   = "cluster-subnet"
-      subnet_ip     = "10.10.0.0/16"
-      subnet_region = "us-central1"
-    },
-  ]
-  secondary_ranges = {
-    "cluster-subnet" = [
-      {
-        range_name    = "ip-range-pods"
-        ip_cidr_range = "10.20.0.0/16"
-      },
-      {
-        range_name    = "ip-range-services"
-        ip_cidr_range = "10.30.0.0/16"
-      },
-    ]
-  }
-}
-
-
 data "google_client_config" "default" {}
 
 provider "kubernetes" {
@@ -45,6 +19,7 @@ module "gke" {
   http_load_balancing        = false
   horizontal_pod_autoscaling = true
   network_policy             = false
+  depends_on = [module.gcp-network]
 
   node_pools = [
     {
