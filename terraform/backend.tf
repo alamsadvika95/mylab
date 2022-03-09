@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "terraform-343304-tfstate"
+    bucket = "peak-lattice-342202"
     prefix = "terraform"
   }
 }
