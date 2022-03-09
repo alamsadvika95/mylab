@@ -11,7 +11,7 @@ module "gke" {
   project_id                 = "terraform-343304"
   name                       = "gke-test-1"
   region                     = "us-central1"
-  zone                       = "us-central1-a"
+  zones                      = ["us-central1-a"]
   network                    = "vpc-01"
   subnetwork                 = "us-central1-01"
   ip_range_pods              = "ip-range-pods"
