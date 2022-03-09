@@ -16,7 +16,7 @@ module "gke" {
   subnetwork                 = "cluster-subnet"
   ip_range_pods              = "ip-range-pods"
   ip_range_services          = "ip-range-services"
-  http_load_balancing        = false
+  http_load_balancing        = true
   horizontal_pod_autoscaling = true
   network_policy             = false
   istio = true
