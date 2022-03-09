@@ -1,5 +1,5 @@
-.terraform/
-terraform/
-.terraform.lock.hcl
-temp/
-note.txt
+terraform/.terraform/
+terraform/terraform/
+terraform.terraform.lock.hcl
+terraform/temp/
+terraform/note.txt
