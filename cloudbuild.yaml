@@ -20,7 +20,7 @@ steps:
   args: 
   - '-c'
   - | 
-      cd terraform/kubernetes-spotvm
+      cd terraform/
       terraform init
 # [START tf-plan]
 - id: 'terraform plan'
@@ -29,7 +29,7 @@ steps:
   args: 
   - '-c'
   - | 
-      cd terraform/kubernetes-spotvm
+      cd terraform/
       terraform plan
 # [END tf-plan]
 
@@ -39,7 +39,7 @@ steps:
   entrypoint: 'sh'
   args: 
   - '-c'
-  - |    
-      cd terraform/kubernetes-spotvm 
+  - |  
+      cd terraform/
       terraform apply -auto-approve
 # [END tf-apply]
