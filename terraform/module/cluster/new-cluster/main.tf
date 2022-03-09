@@ -7,35 +7,43 @@ provider "kubernetes" {
 }
 
 module "gke" {
-  source                     = "terraform-google-modules/kubernetes-engine/google"
+  source                     = "terraform-google-modules/kubernetes-engine/google//modules/beta-public-cluster"
   project_id                 = "terraform-343304"
   name                       = "gke-test-1"
   region                     = "us-central1"
-  zones                      = ["us-central1-a", "us-central1-b", "us-central1-f"]
-  network                    = "cluster"
-  subnetwork                 = "cluster-subnet"
+  zones                      = "us-central1-a"
+  network                    = "vpc-01"
+  subnetwork                 = "us-central1-01"
   ip_range_pods              = "ip-range-pods"
   ip_range_services          = "ip-range-services"
   http_load_balancing        = false
   horizontal_pod_autoscaling = true
   network_policy             = false
-  depends_on = [module.gcp-network]
+  istio = true
+  cloudrun = true
+  dns_cache = false
+  depends_on = [
+    module.gcp-network
+  ]
 
   node_pools = [
     {
       name                      = "default-node-pool"
       machine_type              = "e2-micro"
-      node_locations            = "us-central1-b,us-central1-c"
+      node_locations            = "us-central1-a"
       min_count                 = 1
-      max_count                 = 100
+      max_count                 = 2
       local_ssd_count           = 0
+      spot                      = true
+      local_ssd_ephemeral_count = 0
       disk_size_gb              = 100
       disk_type                 = "pd-standard"
       image_type                = "COS_CONTAINERD"
       auto_repair               = true
       auto_upgrade              = true
+      service_account           = "project-service-account@<PROJECT ID>.iam.gserviceaccount.com"
       preemptible               = false
-      initial_node_count        = 80
+      initial_node_count        = 1
     },
   ]
 
