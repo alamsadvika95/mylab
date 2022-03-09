@@ -12,8 +12,8 @@ module "gke" {
   name                       = "gke-test-1"
   region                     = "us-central1"
   zones                      = ["us-central1-a", "us-central1-b", "us-central1-f"]
-  network                    = "cluster"
-  subnetwork                 = "cluster-subnet"
+  network                    = module.gcp-network.network_name
+  subnetwork                 = module.gcp-network.subnets.subnet_name
   ip_range_pods              = "ip-range-pods"
   ip_range_services          = "ip-range-services"
   http_load_balancing        = false
@@ -33,7 +33,6 @@ module "gke" {
       image_type                = "COS_CONTAINERD"
       auto_repair               = true
       auto_upgrade              = true
-      service_account           = "project-service-account@terraform-343304.iam.gserviceaccount.com"
       preemptible               = false
       initial_node_count        = 80
     },
