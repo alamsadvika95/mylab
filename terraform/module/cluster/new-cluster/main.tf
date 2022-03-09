@@ -92,7 +92,7 @@ module "gcp-network" {
     {
       subnet_name   = "cluster-subnet"
       subnet_ip     = "10.10.0.0/16"
-      subnet_region = v"us-central1"
+      subnet_region = "us-central1"
     },
   ]
   secondary_ranges = {
