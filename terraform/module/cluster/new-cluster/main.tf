@@ -12,8 +12,8 @@ module "gke" {
   name                       = "gke-test-1"
   region                     = "us-central1"
   zones                      = ["us-central1-a", "us-central1-b", "us-central1-f"]
-  network                    = "default"
-  subnetwork                 = "default"
+  network                    = "cluster"
+  subnetwork                 = "cluster-subnet"
   ip_range_pods              = "ip-range-pods"
   ip_range_services          = "ip-range-services"
   http_load_balancing        = false
@@ -80,6 +80,31 @@ module "gke" {
 
     default-node-pool = [
       "default-node-pool",
+    ]
+  }
+}
+
+module "gcp-network" {
+  source       = "terraform-google-modules/network/google"
+  project_id   = "terraform-343304"
+  network_name = "cluster"
+  subnets = [
+    {
+      subnet_name   = "cluster-subnet"
+      subnet_ip     = "10.10.0.0/16"
+      subnet_region = v"us-central1"
+    },
+  ]
+  secondary_ranges = {
+    "cluster-subnet" = [
+      {
+        range_name    = "ip-range-pods"
+        ip_cidr_range = "10.20.0.0/16"
+      },
+      {
+        range_name    = "ip-range-services"
+        ip_cidr_range = "10.30.0.0/16"
+      },
     ]
   }
 }
