@@ -13,7 +13,7 @@ module "gke" {
   region                     = "us-central1"
   zones                      = ["us-central1-a", "us-central1-b", "us-central1-f"]
   network                    = module.gcp-network.network_name
-  subnetwork                 = module.gcp-network.subnets.subnet_name
+  subnetwork                 = module.gcp-network.subnet_name
   ip_range_pods              = "ip-range-pods"
   ip_range_services          = "ip-range-services"
   http_load_balancing        = false
