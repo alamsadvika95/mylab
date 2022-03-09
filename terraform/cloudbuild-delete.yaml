@@ -6,6 +6,7 @@ steps:
   args: 
   - '-c'
   - |
+      cd terraform/
       terraform init
 
 # [START tf-destroy]
@@ -14,6 +15,7 @@ steps:
   entrypoint: 'sh'
   args: 
   - '-c'
-  - |     
+  - |    
+      cd terraform/ 
       terraform destroy -auto-approve
 # [END tf-apply]
