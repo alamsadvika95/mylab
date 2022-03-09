@@ -20,7 +20,7 @@ module "gke" {
   horizontal_pod_autoscaling = true
   network_policy             = false
   istio = true
-  cloudrun = true
+  # cloudrun = true
   dns_cache = false
   depends_on = [
     module.gcp-network
