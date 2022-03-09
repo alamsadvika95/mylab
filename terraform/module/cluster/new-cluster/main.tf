@@ -20,7 +20,7 @@ module "gke" {
   horizontal_pod_autoscaling = true
   network_policy             = false
   istio = true
-  # cloudrun = true
+  cloudrun = true
   dns_cache = false
   depends_on = [
     module.gcp-network
@@ -41,7 +41,7 @@ module "gke" {
       image_type                = "COS_CONTAINERD"
       auto_repair               = true
       auto_upgrade              = true
-      service_account           = "project-service-account@<PROJECT ID>.iam.gserviceaccount.com"
+      service_account           = "project-service-account@terraform-343304.iam.gserviceaccount.com"
       preemptible               = false
       initial_node_count        = 1
     },
