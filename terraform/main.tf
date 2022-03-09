@@ -15,7 +15,7 @@ provider "google-beta" {
 }
 
 module "cluster" {
-  source  = "./module/network/vpc"
+  source  = "./module/cluster/new-cluster"
 }
 
 
