@@ -19,19 +19,9 @@ steps:
   entrypoint: 'sh'
   args: 
   - '-c'
-  - | 
-      cd terraform/
+  - |
       terraform init
-# [START tf-plan]
-- id: 'terraform plan'
-  name: 'hashicorp/terraform:1.1.7'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-      cd terraform/
-      terraform plan
-# [END tf-plan]
+
 
 # [START tf-apply]
 - id: 'terraform apply'
@@ -39,7 +29,6 @@ steps:
   entrypoint: 'sh'
   args: 
   - '-c'
-  - |  
-      cd terraform/
+  - |     
       terraform apply -auto-approve
 # [END tf-apply]
