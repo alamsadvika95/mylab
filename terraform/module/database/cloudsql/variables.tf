@@ -12,5 +12,5 @@ variable "region" {
 }
 variable "preferable_zone" {
   description = "The region to host the cluster in"
-  default     = "asia-southeast2-a"
+  default     = "asia-southeast2-b"
 }
