@@ -20,7 +20,7 @@ resource "google_sql_database_instance" "read_replica" {
       private_network = "projects/${var.project_id}/global/networks/default"
     }
     location_preference {
-      zone = "europe-west4-a"
+      zone = "${var.region}"
     }
   }
 }
