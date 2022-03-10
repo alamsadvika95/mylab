@@ -20,6 +20,6 @@ steps:
       cd terraform/ 
       terraform destroy -auto-approve
 # [END tf-apply]
-timeout: 1800s
+timeout: 1700s
 
 
