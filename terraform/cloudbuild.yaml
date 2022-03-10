@@ -23,6 +23,16 @@ steps:
       cd terraform/
       terraform init
 
+# [START tf-apply]
+- id: 'terraform plan'
+  name: 'hashicorp/terraform:1.1.7'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |   
+      cd terraform/  
+      terraform plan 
+# [END tf-apply]
 
 # [START tf-apply]
 - id: 'terraform apply'
