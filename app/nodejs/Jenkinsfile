@@ -1,0 +1,69 @@
+pipeline{
+		agent any
+		stages{
+			stage("Checkout Code"){
+				steps{
+						checkoutscm
+				}
+			}
+			stage("Build Image"){
+				steps {
+					script {
+						app = docker.build("cicd-339902/ms1", "-f app/nodejs/Dockerfile ./")
+					}
+				}
+			}
+			stage ("Push Image ") {
+				steps{
+					script{
+						docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
+							dockerImage.push()
+						}
+					}
+				}
+			}
+		}
+}
+
+
+
+
+// pipeline{
+
+// 	agent any
+
+// 	environment {
+// 		DOCKERHUB_CREDENTIALS=credentials('docker-hub')
+// 	}
+
+// 	stages {
+
+// 		stage('Build') {
+
+// 			steps {
+// 				sh 'docker build -t alamsadvika/node-web-app:latest .'
+// 			}
+// 		}
+
+// 		stage('Login') {
+
+// 			steps {
+// 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+// 			}
+// 		}
+
+// 		stage('Push') {
+
+// 			steps {
+// 				sh 'docker push alamsadvika/node-web-app:latest'
+// 			}
+// 		}
+// 	}
+
+// 	post {
+// 		always {
+// 			sh 'docker logout'
+// 		}
+// 	}
+
+// }
