@@ -1,7 +1,8 @@
 resource "google_sql_database_instance" "read_replica" {
   name                 = "replica-${var.master_instance}"
   master_instance_name = "${var.project_id}:${var.master_instance}"
-  region               = "${var.region}"
+  zone               = "${var.zone}"
+  region             = "${var.region}"
   database_version     = "MYSQL_5_7"
 
   replica_configuration {
