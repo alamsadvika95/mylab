@@ -3,6 +3,7 @@ resource "google_sql_database_instance" "read_replica" {
   master_instance_name = "${var.project_id}:${var.master_instance}"
   region               = "${var.region}"
   database_version     = "MYSQL_5_7"
+  deletion_protection  = false
 
   replica_configuration {
     failover_target = false
