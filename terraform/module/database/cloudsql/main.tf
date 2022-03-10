@@ -1,8 +1,7 @@
 resource "google_sql_database_instance" "read_replica" {
   name                 = "replica-${var.master_instance}"
   master_instance_name = "${var.project_id}:${var.master_instance}"
-  zone               = "${var.zone}"
-  region             = "${var.region}"
+  region               = "${var.region}"
   database_version     = "MYSQL_5_7"
 
   replica_configuration {
@@ -21,7 +20,7 @@ resource "google_sql_database_instance" "read_replica" {
       private_network = "projects/${var.project_id}/global/networks/default"
     }
     location_preference {
-      zone = "us-central1-a"
+      zone = "${var.preferable_zone}"
     }
   }
 }
