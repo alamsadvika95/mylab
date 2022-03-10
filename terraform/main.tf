@@ -14,8 +14,8 @@ provider "google-beta" {
   project = var.project
 }
 
-module "cluster" {
-  source  = "./module/cluster/new-cluster"
+module "cloudsql" {
+  source  = "./module/database/cloudsql"
 }
 
 
