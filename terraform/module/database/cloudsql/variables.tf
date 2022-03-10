@@ -4,7 +4,7 @@ variable "project_id" {
 }
 variable "master_instance" {
   description = "The name for the GKE cluster"
-  default     = "mysqlinstance"
+  default     = "sqlinstance"
 }
 variable "region" {
   description = "The region to host the cluster in"
