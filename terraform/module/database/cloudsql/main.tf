@@ -1,5 +1,5 @@
 resource "google_sql_database_instance" "read_replica" {
-  name                 = "replica-${var.master_instance}"
+  name                 = "replicas-${var.master_instance}"
   master_instance_name = "${var.project_id}:${var.master_instance}"
   region               = "${var.region}"
   database_version     = "MYSQL_5_7"

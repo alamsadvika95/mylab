@@ -44,5 +44,5 @@ steps:
   - |   
       cd terraform/  
       terraform apply -auto-approve
-  
 # [END tf-apply]
+timeout: 1800s
