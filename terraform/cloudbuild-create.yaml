@@ -37,11 +37,12 @@ steps:
 # [START tf-apply]
 - id: 'terraform apply'
   name: 'hashicorp/terraform:1.1.7'
+  timeout: 6100s
   entrypoint: 'sh'
   args: 
   - '-c'
   - |   
       cd terraform/  
       terraform apply -auto-approve
-  timeout: 6100s
+  
 # [END tf-apply]
