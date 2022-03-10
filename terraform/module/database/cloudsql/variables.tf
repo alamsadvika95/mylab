@@ -8,5 +8,6 @@ variable "master_instance" {
 }
 variable "region" {
   description = "The region to host the cluster in"
-  default     = "asia-southeast1"
+  default     = "asia-southeast2"
 }
+
