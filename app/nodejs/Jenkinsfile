@@ -1,6 +1,9 @@
 pipeline{
 		environment {
 			DOCKERHUB_CREDENTIALS = credentials("dockerhub")
+			imagename = "alamsadvika/api"
+			registryCredential = "dockerhub"
+			dockerImage = ''
 		}
 		agent any
 		stages{
@@ -41,9 +44,10 @@ pipeline{
 			stage("Push to Docker Hub"){
 				steps {
 					dir("app/nodejs/"){
-						sh "docker build -t alamsadvika/api:latest . "
-						sh "echo $DOCKERHUB_CREDENTIALS | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
-						sh "docker push alamsadvika/api:latest"
+						docker.withRegistry( '', registryCredential ){
+							dockerImage.push("$BUILD_NUMBER")
+							dockerImage.push('latest')
+						}
 					}
 				}
 			}
