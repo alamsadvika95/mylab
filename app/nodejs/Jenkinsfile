@@ -1,4 +1,7 @@
 pipeline{
+		environment {
+			DOCKERHUB_CREDENTIALS = credentials("dockerhub")
+		}
 		agent any
 		stages{
 			stage("Checkout Code"){
@@ -35,7 +38,25 @@ pipeline{
 					}
 				}
 			}
-			stage ("Push Image ") {
+			stage("Push to Docker Hub"){
+				steps {
+					dir("app/nodejs/"){
+						sh "docker build -t alamsadvika/api:latest . "
+						sh "echo $DOCKERHUB_CREDENTIALS | docker login -u alamsadvika --password-stdin"
+						sh "docker push alamsadvika/api:latest"
+					}
+				}
+			}
+			stage ("Push Image GCR ") {
+				steps{
+					script{
+						docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
+							app.push()
+						}
+					}
+				}
+			}
+			stage ("Push Image GCR ") {
 				steps{
 					script{
 						docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
