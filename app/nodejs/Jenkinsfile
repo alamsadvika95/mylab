@@ -42,7 +42,7 @@ pipeline{
 				steps {
 					dir("app/nodejs/"){
 						sh "docker build -t alamsadvika/api:latest . "
-						sh "echo $DOCKERHUB_CREDENTIALS | docker login -u alamsadvika --password-stdin"
+						sh "echo $DOCKERHUB_CREDENTIALS | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
 						sh "docker push alamsadvika/api:latest"
 					}
 				}
