@@ -6,38 +6,58 @@ pipeline{
 					checkout scm
 				}
 			}
-			// stage("Install Project Dependencies"){
-			// 	steps{
-			// 		nodejs(nodeJSInstallationName: "nodejs"){
-			// 			sh "cd app/nodejs/ && npm install"
-			// 			withSonarQubeEnv('sonarqube-server'){
-			// 				sh "cd app/nodejs/ && npm install sonar-scanner"
-			// 				sh "cd app/nodejs/ && npm run sonarqube-server"
-			// 			}
-			// 		}
-			// 	}
-			// }
-			stage("Build Image"){
-				steps {
-					script {
-						app = docker.build("cicd-339902/ms1", "-f app/nodejs/Dockerfile ./")
-					}
-				}
-			}
-			stage ("Push Image ") {
+			stage{
 				steps{
 					script{
-						docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
-							dockerImage.push()
+						def scannerHome = tool 'sonarqube';
+						withSonarQubeEnv("sonarqube-server") {
+							sh "${tool("sonarqube")}/bin/sonar-scanner \
+							-Dsonar.projectKey=test-node-js \
+							-Dsonar.sources=. \
+							-Dsonar.css.node=. \
+							-Dsonar.host.url=https://cr.singorojo.my.id \
+							-Dsonar.login=d434e512d1c8be1fd545db37d9a898e1d12f4cbb"
 						}
 					}
 				}
 			}
+			stage("Install Project Dependencies"){
+				steps{
+					nodejs(nodeJSInstallationName: "nodejs"){
+						sh "cd app/nodejs/ && npm install"
+					}
+				}
+			}
+			// stage("Build Image"){
+			// 	steps {
+			// 		script {
+			// 			app = docker.build("cicd-339902/ms1", "-f app/nodejs/Dockerfile ./")
+			// 		}
+			// 	}
+			// }
+			// stage ("Push Image ") {
+			// 	steps{
+			// 		script{
+			// 			docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
+			// 				dockerImage.push()
+			// 			}
+			// 		}
+			// 	}
+			// }
 		}
 }
 
 
 
+
+
+
+
+
+
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 
 // pipeline{
 
