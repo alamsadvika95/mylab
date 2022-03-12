@@ -39,7 +39,7 @@ pipeline{
 				steps{
 					script{
 						docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
-							dockerImage.push()
+							app.push()
 						}
 					}
 				}
