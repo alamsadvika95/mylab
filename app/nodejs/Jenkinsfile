@@ -6,25 +6,14 @@ pipeline{
 					checkout scm
 				}
 			}
-			stage("Code Quality Check via SonarQube"){
-				steps{
-					script{
-						def scannerHome = tool 'sonarqube';
-							withSonarQubeEnv("sonarqube-server"){
-							sh "cd app/nodejs/ && ${tool("sonarqube")}/bin/sonar-scanner \
-							-Dsonar.projectKey=test-node-js \
-							-Dsonar.sources=. \
-							-Dsonar.css.node=. \
-							-Dsonar.host.url=https://cr.singorojo.my.id/ \
-							-Dsonar.login=d434e512d1c8be1fd545db37d9a898e1d12f4cbb"
-               }
-					}
-				}
-			}
 			stage("Install Project Dependencies"){
 				steps{
 					nodejs(nodeJSInstallationName: "nodejs"){
 						sh "cd app/nodejs/ && npm install"
+						withSonarQubeEnv('sonarqube-scanner'){
+							sh "cd app/nodejs/ && npm install sonar-scanner"
+							sh "cd app/nodejs/ && npm run sonar"
+						}
 					}
 				}
 			}
