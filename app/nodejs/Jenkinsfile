@@ -31,7 +31,7 @@ pipeline{
 			stage("Build Image"){
 				steps {
 					script {
-						app = docker.build("cicd-339902/ms1", "-f app/nodejs/Dockerfile ./")
+						app = docker.build("cicd-339902/ms1", "-f app/nodejs/Dockerfile .")
 					}
 				}
 			}
