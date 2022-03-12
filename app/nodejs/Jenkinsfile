@@ -6,33 +6,33 @@ pipeline{
 					checkout scm
 				}
 			}
-			stage("Install Project Dependencies"){
-				steps{
-					nodejs(nodeJSInstallationName: "nodejs"){
-						sh "cd app/nodejs/ && npm install"
-						withSonarQubeEnv('sonarqube-server'){
-							sh "cd app/nodejs/ && npm install sonar-scanner"
-							sh "cd app/nodejs/ && npm run sonarqube-server"
-						}
-					}
-				}
-			}
-			// stage("Build Image"){
-			// 	steps {
-			// 		script {
-			// 			app = docker.build("cicd-339902/ms1", "-f app/nodejs/Dockerfile ./")
-			// 		}
-			// 	}
-			// }
-			// stage ("Push Image ") {
+			// stage("Install Project Dependencies"){
 			// 	steps{
-			// 		script{
-			// 			docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
-			// 				dockerImage.push()
+			// 		nodejs(nodeJSInstallationName: "nodejs"){
+			// 			sh "cd app/nodejs/ && npm install"
+			// 			withSonarQubeEnv('sonarqube-server'){
+			// 				sh "cd app/nodejs/ && npm install sonar-scanner"
+			// 				sh "cd app/nodejs/ && npm run sonarqube-server"
 			// 			}
 			// 		}
 			// 	}
 			// }
+			stage("Build Image"){
+				steps {
+					script {
+						app = docker.build("cicd-339902/ms1", "-f app/nodejs/Dockerfile ./")
+					}
+				}
+			}
+			stage ("Push Image ") {
+				steps{
+					script{
+						docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
+							dockerImage.push()
+						}
+					}
+				}
+			}
 		}
 }
 
