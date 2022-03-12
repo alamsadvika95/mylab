@@ -56,15 +56,6 @@ pipeline{
 					}
 				}
 			}
-			stage ("Push Image GCR ") {
-				steps{
-					script{
-						docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
-							app.push()
-						}
-					}
-				}
-			}
 		}
 }
 
