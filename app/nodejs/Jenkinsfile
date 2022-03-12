@@ -10,7 +10,7 @@ pipeline{
 				steps{
 					script{
 						def scannerHome = tool 'sonarqube';
-							withSonarQubeEnv("sonarqube-token"){
+							withSonarQubeEnv("sonarqube-server"){
 							sh "cd app/nodejs/ && ${tool("sonarqube")}/bin/sonar-scanner \
 							-Dsonar.projectKey=test-node-js \
 							-Dsonar.sources=. \
