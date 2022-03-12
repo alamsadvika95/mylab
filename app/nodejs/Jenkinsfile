@@ -3,7 +3,14 @@ pipeline{
 		stages{
 			stage("Checkout Code"){
 				steps{
-						checkout scm
+					checkout scm
+				}
+			}
+			stage("Sonarqube Analysis"){
+				steps{
+					nodejs(nodeJSInstallationName: "nodejs"){
+						sh "npm install"
+					}
 				}
 			}
 			stage("Build Image"){
