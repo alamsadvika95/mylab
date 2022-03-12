@@ -28,22 +28,22 @@ pipeline{
 					}
 				}
 			}
-			// stage("Build Image"){
-			// 	steps {
-			// 		script {
-			// 			app = docker.build("cicd-339902/ms1", "-f app/nodejs/Dockerfile ./")
-			// 		}
-			// 	}
-			// }
-			// stage ("Push Image ") {
-			// 	steps{
-			// 		script{
-			// 			docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
-			// 				dockerImage.push()
-			// 			}
-			// 		}
-			// 	}
-			// }
+			stage("Build Image"){
+				steps {
+					script {
+						app = docker.build("cicd-339902/ms1", "-f app/nodejs/Dockerfile ./")
+					}
+				}
+			}
+			stage ("Push Image ") {
+				steps{
+					script{
+						docker.withRegistry('https://eu.gcr.io', 'gcr:gcr-admin-key'){
+							dockerImage.push()
+						}
+					}
+				}
+			}
 		}
 }
 
