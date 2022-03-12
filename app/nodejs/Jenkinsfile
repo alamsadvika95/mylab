@@ -12,7 +12,7 @@ pipeline{
 						sh "cd app/nodejs/ && npm install"
 						withSonarQubeEnv('sonarqube-server'){
 							sh "cd app/nodejs/ && npm install sonar-scanner"
-							sh "cd app/nodejs/ && npm run sonar"
+							sh "cd app/nodejs/ && npm run sonarqube-server"
 						}
 					}
 				}
