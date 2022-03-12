@@ -43,12 +43,15 @@ pipeline{
 			}
 			stage("Push to Docker Hub"){
 				steps {
-					dir("app/nodejs/"){
-						docker.withRegistry( '', registryCredential ){
-							dockerImage.push("$BUILD_NUMBER")
-							dockerImage.push('latest')
+					script{
+						dir("app/nodejs/"){
+							dockerImage = docker.build imagename
+							docker.withRegistry( '', registryCredential ){
+								dockerImage.push("$BUILD_NUMBER")
+								dockerImage.push('latest')
+							}
 						}
-					}
+					}	
 				}
 			}
 			stage ("Push Image GCR ") {
