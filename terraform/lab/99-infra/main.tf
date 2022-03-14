@@ -16,7 +16,7 @@ provider "google-beta" {
 
 module "cloudsql" {
   source  = "./cloudsql"
-  master_instance = "cloudsql"
+  master_instance = "cloudsql-master"
   region = "us-central1"
   project_id = "terraform-343304"
   preferable_zone = "us-central1-a" 
