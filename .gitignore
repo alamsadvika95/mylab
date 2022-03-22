@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 terraform/.terraform/
 terraform/terraform/
 terraform.terraform.lock.hcl
 terraform/temp/
 terraform/note.txt
+=======
+.terraform/
+terraform/
+.terraform.lock.hcl
+temp/
+note.txt
+>>>>>>> bbd4d0f6b0c9df64a0e71e7a5f175e484207a11f
