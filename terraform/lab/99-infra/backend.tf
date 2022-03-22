@@ -1,6 +1,6 @@
 terraform {
-  backend "gcs" {
-    bucket = "mylab-terraform"
-    prefix = "test"
+  backend "local" {
+    # credentials = "./terraform-gke-keyfile.json"
+    path = "relative/path/to/terraform.tfstate"
   }
 }
